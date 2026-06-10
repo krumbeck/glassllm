@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlassLLM - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="glass-card">
+            <h1>🔮 GlassLLM</h1>
+            <p class="subtitle">Peer deep into the probabilities of language models.</p>
+
+            <form method="POST">
+                <div class="form-group">
+                    <label for="prompt">Enter the beginning of a sentence (the AI will predict the next word):</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="prompt" name="prompt" value="{{ prompt }}" placeholder="e.g., The best thing about coding is..." autocomplete="off">
+                        <button type="submit">Analyze</button>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="temperature" style="display: flex; justify-content: space-between;">
+                        <span>Creativity (Temperature):</span>
+                        <strong id="temp-display">{{ temperature if temperature is not none else 1.0 }}</strong>
+                    </label>
+                    <input type="range" id="temperature" name="temperature" 
+                           min="0.0" max="1.0" step="0.1" 
+                           value="{{ temperature if temperature is not none else 1.0 }}" 
+                           style="width: 100%; margin-top: 8px; cursor: pointer;"
+                           oninput="document.getElementById('temp-display').innerText = this.value">
+                    <p class="subtitle" style="font-size: 0.8rem; margin-top: 4px; opacity: 0.7;">
+                        0.0 = Predictable & Strict (Greedy) | 1.0 = Creative & Surprising (Sampling)
+                    </p>
+                </div>
+            </form>
+
+            {% if error %}
+                <div class="error-msg">
+                    <strong>⚠️ {{ error }}</strong>
+                </div>
+            {% endif %}
+        </div>
+
+        {% if results %}
+            <div class="glass-card">
+                <h2 class="results-title">Behind the Scenes</h2>
+                
+                {% for token in results %}
+                    <div class="token-card">
+                        <p>Generated Fragment: <span class="token-badge">'{{ token.wort_fragment }}'</span></p>
+                        
+                        <ul class="options-list">
+                            {% for opt in token.top_optionen %}
+                                <li class="option-item">
+                                    <span class="option-token">'{{ opt.token }}'</span>
+    
+                                    <span class="option-prob 
+                                        {% if opt.raw_prob >= 90 %}prob-high
+                                        {% elif opt.raw_prob >= 50 %}prob-medium
+                                        {% elif opt.raw_prob >= 10 %}prob-orange
+                                        {% else %}prob-low
+                                        {% endif %}">
+                                        {{ opt.wahrscheinlichkeit }}% confidence
+                                    </span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
