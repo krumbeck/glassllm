@@ -4,7 +4,7 @@
 
 A Flask-based web application designed to visualize the internal token prediction mechanics of LLMs. This project was built as the Final Project for **Harvard's CS50x**.
 
-#### 🎥 Video Demo: <YOUTUBE-LINK >
+#### 🎥 Video Demo: <[YOUTUBE-LINK](https://youtu.be/UXe8XN3RMKQ) >
 
 ---
 
@@ -13,29 +13,28 @@ A Flask-based web application designed to visualize the internal token predictio
 
 ### The Interactive Dashboard
 
-Here you can see the core user interface where sentences are analyzed, showing the top 3 alternative tokens for each generation step with an adaptive color-coded confidence score:
+Here you can see the user interface where sentences are analyzed, showing the top 3 alternative tokens for each generation step with a color-coded confidence score:
 
 ![GlassLLM Dashboard](screenshots/dashboard_main.png)
 
-By adjusting the Temperature slider, users can see how the model's base token probabilities remain constant, but the generation changes from predictable (Greedy Search at 0.0) to creative (Sampling at 1.0)
 
 ---
 
 ## 📝 Description
 
-**GlassLLM** is an educational tool that illustrates how LLMs choose their words. GlassLLM reveals the underlying mathematical probabilities behind every token generated.
+**GlassLLM** is an educational tool that illustrates how LLMs choose their words. GlassLLM reveals the underlying probabilities behind every token generated.
 
 ### Why I Built This
 
-During my journey in CS50, I became fascinated by how large language models predict the next word based on probability distributions. I wanted to build an intuitive interface that allows anyone to visualize these probabilities in real-time, making concepts like `logprobs` and `temperature` easy to understand.
+I wanted to build an intuitive interface that allows anyone to visualize these probabilities in real-time, making concepts like `logprobs` and `temperature` easier to understand.
 
 ---
 
 ## ✨ Features
 
-- **Real-Time Tokenization Breakdown:** Displays exactly how the API splits the generated text into individual sub-word fragments.
-- **Top 3 Alternatives Visualizer:** For every generated token, the app fetches and displays the top 3 alternative words the model considered at that exact moment.
-- **Logprob-to-Percentage Conversion:** Converts complex logarithmic values (`logprobs`) from the OpenAI API into reader-friendly percentage scores using advanced mathematical conversions ($e^{logprob} \times 100$).
+- **Real-Time Tokenization Breakdown:** Displays exactly how the API splits the generated text into tokens.
+- **Top 3 Alternatives Visualizer:** For every generated token, the app fetches and displays the top 3 alternative token the model considered at that exact moment.
+- **Logprob-to-Percentage Conversion:** Converts complex logarithmic values (`logprobs`) from the OpenAI API into reader-friendly percentage scores using conversions ($e^{logprob} \times 100$).
 - **Dynamic Glassmorphism UI:** UI designed with frosted-glass cards and clean typography.
 - **Interactive Creativity Control:** Features a live HTML/JavaScript `temperature` slider that controls the sampling behavior of the GPT-4o-mini model.
 - **Smart Color Coding:** Automatically applies an "input traffic light" system to probabilities (Green for $\ge 90\%$, Light Green for $\ge 50\%$, Orange for $\ge 10\%$, Red for low confidence) using Jinja2 template logic.
