@@ -10,6 +10,7 @@ A Flask-based web application designed to visualize the internal token predictio
 
 ## 📸 Screenshots
 
+
 ### The Interactive Dashboard
 
 Here you can see the core user interface where sentences are analyzed, showing the top 3 alternative tokens for each generation step with an adaptive color-coded confidence score:
