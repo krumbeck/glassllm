@@ -4,7 +4,6 @@
 
 A Flask-based web application designed to visualize the internal token prediction mechanics of LLMs. This project was built as the Final Project for **Harvard's CS50x**.
 
-#### 🎥 Video Demo: <[YOUTUBE-LINK](https://youtu.be/UXe8XN3RMKQ) >
 
 ---
 
